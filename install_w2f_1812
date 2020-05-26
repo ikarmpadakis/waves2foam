@@ -36,7 +36,7 @@ echo "Creating Docker OpenFOAM container ${containerName}"
 # Create docker container with OpenFOAM environment
 docker run  -it -d --name ${containerName}                  \
     --workdir="/home/ofuser"                                \
-    -v="${home}":/home/ofuser/workingDir                    \
+    -v="${home}":/home/ofuser                               \
     -e DISPLAY=host.docker.internal:0                       \
     ${imageName}:latest /bin/bash
 
