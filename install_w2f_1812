@@ -1,0 +1,47 @@
+# This file is based on the installMacOpenFOAM guidance by OpenFOAM
+#
+# Description
+#     this script os for native build of DOCKER on MAC-OSX
+#     1) Pull OpenFOAM-v1812 with waves2Foam from docker hub if it does not exist in local
+#        environment
+#     2) Create a container with the name w2f_1812
+#     3) To login as root
+#          *  Root: to login as root run command "su root"
+#          password: openfoam
+#
+# NOTE:
+#     This script should be placed in home area
+#     Install XQuartz in Mac to support built-in Paraview
+#     To post-process, prefer native Paraview on your MAC
+#
+#------------------------------------------------------------------------------
+
+username="$USER"
+user="$(id -u)"
+home="${1:-$HOME}"
+
+imageName="ikarmpadakis/waves2foam_1812"
+containerName="w2f_1812"
+displayVar="$DISPLAY"
+
+# List container in docker environment
+echo "*********************************************************"
+echo "List of Container in docker environment:"
+echo "*********************************************************"
+docker ps -a
+echo "**************************************** "
+echo "			"
+echo "Creating Docker OpenFOAM container ${containerName}"
+
+# Create docker container with OpenFOAM environment
+docker run  -it -d --name ${containerName}                  \
+    --workdir="/home/ofuser"                                \
+    -v="${home}":/home/ofuser/workingDir                    \
+    -e DISPLAY=host.docker.internal:0                       \
+    ${imageName}:latest /bin/bash
+
+echo "Container ${containerName} was created."
+
+echo "*********************************************************"
+echo "Run the ./start_w2f_1812 script to launch container"
+echo "*********************************************************"

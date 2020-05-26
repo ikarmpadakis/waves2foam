@@ -1,0 +1,16 @@
+# Test OpenFOAM
+
+mkdir -p $FOAM_RUN
+cd $FOAM_RUN
+cp -r $FOAM_TUTORIALS .
+blockMesh -case tutorials/incompressible/icoFoam/cavity/cavity
+icoFoam -case tutorials/incompressible/icoFoam/cavity/cavity
+paraFoam -case tutorials/incompressible/icoFoam/cavity/cavity
+
+# Test Waves2Foam
+
+source $FOAM_RUN/../applications/utilities/waves2Foam/bin/bashrc
+cd /home/ofuser/OpenFOAM/-v1812/applications/utilities/waves2Foam/tutorials
+cp -r waveFoam/ waveFoam_test
+cd waveFoam_test/standingWave
+./Allrun

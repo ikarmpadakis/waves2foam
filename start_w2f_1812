@@ -1,0 +1,20 @@
+# This file is based on the startMacOpenFOAM guidance by OpenFOAM
+#
+# Description
+#     this script os for native build of DOCKER on MAC-OSX
+
+
+#     1) Start waves2foam container with name w2f_1812
+#     3) To login as root
+#          *  Root: to login as root run command "su root"
+#          password: openfoam
+#
+# NOTE:
+#     This script should be placed in home area
+#     Install XQuartz in Mac to support built-in Paraview
+#     To post-process, prefer native Paraview on your MAC
+#
+#------------------------------------------------------------------------------
+xhost + 127.0.0.1
+docker start w2f_1812
+docker attach w2f_1812
